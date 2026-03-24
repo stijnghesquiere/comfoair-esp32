@@ -278,10 +278,15 @@ class Comfoair: public Component, public climate::Climate, public esphome::api::
 
   climate::ClimateTraits traits() override {
     auto traits = climate::ClimateTraits();
-    traits.set_supports_current_temperature(true);
-    traits.set_supports_current_humidity(true);
-    traits.set_supports_two_point_target_temperature(false);
-    traits.set_supports_action(false);
+    
+    // Replace the 4 deprecated calls with add_feature_flags:
+    traits.add_supported_features({
+        climate::CLIMATE_FEATURE_CURRENT_TEMPERATURE,
+        climate::CLIMATE_FEATURE_CURRENT_HUMIDITY,
+    });
+    // Note: two_point_target_temperature and action were set to FALSE,
+    // so simply don't add those flags — they're off by default.
+
     traits.set_supported_modes({climate::CLIMATE_MODE_AUTO, climate::CLIMATE_MODE_COOL, climate::CLIMATE_MODE_HEAT});
     traits.set_supported_presets({climate::CLIMATE_PRESET_HOME});
     traits.set_visual_min_temperature(10);
@@ -295,7 +300,7 @@ class Comfoair: public Component, public climate::Climate, public esphome::api::
       climate::CLIMATE_FAN_OFF
     });
     return traits;
-  }
+ }
 
   void control(const climate::ClimateCall &instruction) override {
     if (instruction.get_fan_mode().has_value()){
