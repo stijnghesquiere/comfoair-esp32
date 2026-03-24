@@ -280,8 +280,8 @@ class Comfoair: public Component, public climate::Climate, public esphome::api::
     auto traits = climate::ClimateTraits();
     
     // Replace the 4 deprecated calls with add_feature_flags:
-    traits.add_feature_flags(CLIMATE_SUPPORTS_CURRENT_TEMPERATURE | 
-                         CLIMATE_SUPPORTS_CURRENT_HUMIDITY);
+    traits.add_feature_flags(climate::CLIMATE_SUPPORTS_CURRENT_TEMPERATURE | 
+                         climate::CLIMATE_SUPPORTS_CURRENT_HUMIDITY);
     // Note: two_point_target_temperature and action were set to FALSE,
     // so simply don't add those flags — they're off by default.
 
