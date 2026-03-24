@@ -281,8 +281,8 @@ class Comfoair: public Component, public climate::Climate, public esphome::api::
     
     // Replace the 4 deprecated calls with add_feature_flags:
     traits.add_supported_features({
-        climate::CLIMATE_FEATURE_CURRENT_TEMPERATURE,
-        climate::CLIMATE_FEATURE_CURRENT_HUMIDITY,
+        climate::CLIMATE_SUPPORTS_CURRENT_TEMPERATURE,
+        climate::CLIMATE_SUPPORTS_CURRENT_HUMIDITY,
     });
     // Note: two_point_target_temperature and action were set to FALSE,
     // so simply don't add those flags — they're off by default.
